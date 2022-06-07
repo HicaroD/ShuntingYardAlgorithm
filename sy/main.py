@@ -15,6 +15,7 @@ class ShuntingYard:
 
     def advance(self):
         if not self.is_end_of_expression():
+            self.current_token = self.expression[self.cursor]
             self.cursor += 1
 
     def rank_precedence(self, token) -> int:
@@ -39,7 +40,8 @@ class ShuntingYard:
 
         if self.current_token != None:
             while not self.is_end_of_expression():
-                # TODO: Add support to multiple digits numbers
+                print(self.current_token)
+
                 if self.current_token.isdigit():
                     output.append(self.current_token)
                     self.advance()
@@ -47,11 +49,11 @@ class ShuntingYard:
                 elif self.is_operator(self.current_token):
                     self.advance()
 
-                elif self.current_token == '(':
+                elif self.current_token == "(":
                     stack.append(self.current_token)
                     self.advance()
 
-                elif self.current_token == ')':
+                elif self.current_token == ")":
                     self.advance()
 
                 else:
@@ -59,7 +61,7 @@ class ShuntingYard:
         else:
             raise ValueError("Empty expression")
 
-        return self.expression
+        return output
 
 
 def main():
@@ -70,6 +72,6 @@ def main():
             shunting_yard = ShuntingYard(expression)
             rpn_expression = shunting_yard.get_rpn()
             print(f"{expression} = {rpn_expression}")
-        except ValueError as e:
+        except (ValueError, NotImplementedError) as e:
             print(e)
             exit(1)
