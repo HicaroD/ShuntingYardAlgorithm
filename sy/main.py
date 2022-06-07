@@ -2,11 +2,10 @@ class ShuntingYard:
     def __init__(self, expression: str):
         self.expression = expression
         self.cursor = 0
+        self.current_token = None
 
         if not self.is_expression_empty():
             self.current_token = self.expression[0]
-        else:
-            self.current_token = None
 
     def is_expression_empty(self):
         return not self.expression or self.expression.isspace()
@@ -48,19 +47,29 @@ class ShuntingYard:
                 elif self.is_operator(self.current_token):
                     self.advance()
 
-                elif self.current_token == "(":
+                elif self.current_token == '(':
                     stack.append(self.current_token)
                     self.advance()
 
-                elif self.current_token == ")":
+                elif self.current_token == ')':
                     self.advance()
+
+                else:
+                    raise NotImplementedError(f"Invalid token: {self.current_token}")
+        else:
+            raise ValueError("Empty expression")
 
         return self.expression
 
 
 def main():
-    expressions = ["2+3", "5+3+4", "5*3+4", "8/4/2"]
+    expressions = ["2+3", "5+3+4", "5*3+4", "8/4/2^"]
 
     for expression in expressions:
-        shunting_yard = ShuntingYard(expression)
-        print(f"{expression} = {shunting_yard.get_rpn()}")
+        try:
+            shunting_yard = ShuntingYard(expression)
+            rpn_expression = shunting_yard.get_rpn()
+            print(f"{expression} = {rpn_expression}")
+        except ValueError as e:
+            print(e)
+            exit(1)
