@@ -18,7 +18,7 @@ class ShuntingYard:
             self.current_token = self.expression[self.cursor]
             self.cursor += 1
 
-    def rank_precedence(self, token) -> int:
+    def get_precedence(self, token) -> int:
         match token:
             case "+":
                 return 0
@@ -28,8 +28,9 @@ class ShuntingYard:
                 return 2
             case "/":
                 return 2
-            case _:
-                return -1
+
+    def has_higher_precedence(self, top, current):
+        return self.get_precedence(top) > self.get_precedence(current)
 
     def is_operator(self, token):
         return token in {"+", "-", "/", "*"}
