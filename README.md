@@ -15,7 +15,7 @@ I'm gonna be using some fancy features avaiable on Python 3.10, such as match-ca
 
 ### Usage
 
-```
+```bash
 git clone https://github.com/HicaroD/ShuntingYardAlgorithm && cd ShuntingYardAlgorithm
 python sy
 ```
