@@ -1,5 +1,6 @@
 from sy import ShuntingYard
 from lexer import Lexer
+from evaluator import evaluate
 
 
 def main():
@@ -13,7 +14,8 @@ def main():
 
             shunting_yard = ShuntingYard(tokens)
             rpn_expression = shunting_yard.get_rpn_expression()
-            print(f"{expression} = {rpn_expression}")
+            result = evaluate(rpn_expression)
+            print(result)
 
         except (ValueError, NotImplementedError) as e:
             print(e)
