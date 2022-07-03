@@ -13,5 +13,12 @@ called [idk](https://github.com/HicaroD/idk), and I need that algorithm for eval
 ### Why `Python 3.10`?
 I'm gonna be using some fancy features avaiable on Python 3.10, such as match-case statements.
 
+### Usage
+
+```
+git clone https://github.com/HicaroD/ShuntingYardAlgorithm && cd ShuntingYardAlgorithm
+python sy
+```
+
 ### License
 This project is licensed under the MIT License. See [LICENSE](LICENSE).
