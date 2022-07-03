@@ -26,6 +26,14 @@ class Token:
     def __repr__(self):
         return f"{self.kind}({self.lexeme})"
 
+    def is_operator(self) -> bool:
+        return self.kind in {
+            TokenKind.PlusOp,
+            TokenKind.MinusOp,
+            TokenKind.DividesOp,
+            TokenKind.TimesOp,
+        }
+
 
 class Lexer:
     def __init__(self, expression: str) -> None:
@@ -53,39 +61,37 @@ class Lexer:
         return token
 
     def get_token(self) -> Token:
-            match self.current_char:
-                case "(":
-                    return self.consume_and_advance(Token(TokenKind.LeftPar, "("))
+        match self.current_char:
+            case "(":
+                return self.consume_and_advance(Token(TokenKind.LeftPar, "("))
 
-                case ")":
-                    return self.consume_and_advance(Token(TokenKind.RightPar, ")"))
+            case ")":
+                return self.consume_and_advance(Token(TokenKind.RightPar, ")"))
 
-                case "+":
-                    return self.consume_and_advance(Token(TokenKind.PlusOp, "+"))
+            case "+":
+                return self.consume_and_advance(Token(TokenKind.PlusOp, "+"))
 
-                case "-":
-                    return self.consume_and_advance(Token(TokenKind.MinusOp, "-"))
+            case "-":
+                return self.consume_and_advance(Token(TokenKind.MinusOp, "-"))
 
-                case "*":
-                    return self.consume_and_advance(Token(TokenKind.TimesOp, "*"))
+            case "*":
+                return self.consume_and_advance(Token(TokenKind.TimesOp, "*"))
 
-                case "/":
-                    return self.consume_and_advance(Token(TokenKind.DividesOp, "/"))
+            case "/":
+                return self.consume_and_advance(Token(TokenKind.DividesOp, "/"))
 
-                case _:
-                    if self.current_char.isdigit():
-                        number = self.get_number()
-                        return number
-                    else:
-                        raise ValueError(f"Invalid token: {self.current_char}")
-
+            case _:
+                if self.current_char.isdigit():
+                    number = self.get_number()
+                    return number
+                else:
+                    raise ValueError(f"Invalid token: {self.current_char}")
 
     def tokenize(self) -> list[Token]:
         tokens = []
 
         while not self.is_end_of_expression():
             try:
-                print(f"{self.current_char} {self.position}")
                 token = self.get_token()
                 tokens.append(token)
             except ValueError as e:
@@ -94,3 +100,12 @@ class Lexer:
 
         tokens.append(Token(TokenKind.EOF, ""))
         return tokens
+
+
+def main():
+    lexer = Lexer("45+55/12")
+    print(lexer.tokenize())
+
+
+if __name__ == "__main__":
+    main()
