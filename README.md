@@ -1,4 +1,6 @@
 # Shunting Yard Algorithm
+![image](https://user-images.githubusercontent.com/75737377/177057947-045dbda4-e31d-49a2-9208-dcd86698df72.png)
+
 My own implementation of [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) for mathematical expression evaluation.
 
 This project is just a learning experience for my current project, which is a programming language 
