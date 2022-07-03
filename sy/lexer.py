@@ -44,6 +44,10 @@ class Lexer:
     def is_end_of_expression(self) -> bool:
         return self.position >= len(self.expression)
 
+    def skip_whitespace(self):
+        if self.current_char == " ":
+            self.advance()
+
     def advance(self) -> None:
         self.position += 1
         if not self.is_end_of_expression():
@@ -92,6 +96,7 @@ class Lexer:
 
         while not self.is_end_of_expression():
             try:
+                self.skip_whitespace()
                 token = self.get_token()
                 tokens.append(token)
             except ValueError as e:
