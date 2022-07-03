@@ -2,6 +2,12 @@ from enum import Enum
 from dataclasses import dataclass
 
 
+class Associativity(Enum):
+    Left = 1
+    Right = 2
+    Undefined = 3
+
+
 class TokenKind(Enum):
     # Operators
     PlusOp = 1
@@ -33,6 +39,13 @@ class Token:
             TokenKind.DividesOp,
             TokenKind.TimesOp,
         }
+
+    def get_associativity(self) -> Associativity:
+        match self.kind:
+            case TokenKind.PlusOp | TokenKind.MinusOp | TokenKind.TimesOp | TokenKind.DividesOp:
+                return Associativity.Left
+            case _:
+                return Associativity.Undefined
 
 
 class Lexer:
@@ -103,7 +116,7 @@ class Lexer:
                 print(f"{e}")
                 exit(1)
 
-        tokens.append(Token(TokenKind.EOF, ""))
+        # tokens.append(Token(TokenKind.EOF, ""))
         return tokens
 
 

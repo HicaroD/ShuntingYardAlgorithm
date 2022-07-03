@@ -12,7 +12,7 @@ def main():
             tokens = lexer.tokenize()
 
             shunting_yard = ShuntingYard(tokens)
-            rpn_expression = shunting_yard.get_rpn()
+            rpn_expression = shunting_yard.get_rpn_expression()
             print(f"{expression} = {rpn_expression}")
 
         except (ValueError, NotImplementedError) as e:
