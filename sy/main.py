@@ -3,8 +3,6 @@ from lexer import Lexer
 
 
 def main():
-    expressions = ["2+3", "5+3+4", "5*3+4", "8/4/2"]
-
     # REPL
     while 1:
         try:
