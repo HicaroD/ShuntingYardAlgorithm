@@ -7,14 +7,8 @@ class ShuntingYard:
 
     def get_precedence(self, token: Token) -> int:
         match token:
-            case TokenKind.PlusOp:
-                return 0
-            case TokenKind.MinusOp:
-                return 0
-            case TokenKind.TimesOp:
-                return 2
-            case TokenKind.DividesOp:
-                return 2
+            case TokenKind.PlusOp | TokenKind.MinusOp: return 0
+            case TokenKind.TimesOp | TokenKind.DividesOp: return 2
 
     def has_higher_precedence(self, top: Token, current: Token) -> bool:
         return self.get_precedence(top.kind) > self.get_precedence(current.kind)
