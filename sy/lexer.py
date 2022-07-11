@@ -116,14 +116,4 @@ class Lexer:
                 print(f"{e}")
                 exit(1)
 
-        # tokens.append(Token(TokenKind.EOF, ""))
         return tokens
-
-
-def main():
-    lexer = Lexer("45+55/12")
-    print(lexer.tokenize())
-
-
-if __name__ == "__main__":
-    main()
