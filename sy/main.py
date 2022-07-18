@@ -23,3 +23,6 @@ def main():
 
         except EOFError:
             exit(1)
+
+        except ZeroDivisionError:
+            print("Error: Can't divide by zero!")
